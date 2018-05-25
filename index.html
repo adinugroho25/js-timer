@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	Limit In Minutes : <input type="number" id="input-minute" /><button type="button" onclick="set()">Set</button>
+	<h3 id="clock"></h3>
+	<button type="button" onclick="mulai()">Start</button>
+	<button type="button" onclick="berhenti()">Stop</button>
+	<button type="button" onclick="ulang()">Reset</button>
+
+</body>
+</html>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="timer.js"></script>
+
+<script>
+	var inputMinute = $('#input-minute').val();
+	if (inputMinute == ''){
+		$('#input-minute').val(1);
+		inputMinute = 1;
+	}
+ 	var timeInMinute = inputMinute;
+ 	
+ 	window.timer1 = new Timer(timeInMinute,'clock','timeOut()');
+ 	$('#clock').html(window.timer1.timeNow);
+
+ 	function set(){
+ 		window.timer1 = new Timer($('#input-minute').val(),'clock','timeOut()');
+ 		ulang();
+ 	}
+
+ 	function mulai(){
+ 		window.timer1.start();
+ 	}
+
+ 	function berhenti(){
+ 		window.timer1.stop();
+ 	}
+
+ 	function ulang(){
+ 		window.timer1.reset();
+ 		$('#clock').html(window.timer1.timeNow);
+ 	}
+
+ 	function timeOut(){
+ 		alert('waktu habis');
+ 		window.timer1.stop();
+ 	}	
+</script>
